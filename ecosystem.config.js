@@ -29,7 +29,7 @@ const deploy = Array(2)
     host: hosts[i],
     ref: "origin/master",
     repo: "https://github.com/rrudol/ricart-agravala.git",
-    path: "/tmp/www/ricart-agravala",
+    path: "/tmp/www/ricart-agravala2",
     "post-deploy": `npm install && pm2 startOrRestart ecosystem.json --env prod${i}`
   }))
   .reduce((a, c) => {
