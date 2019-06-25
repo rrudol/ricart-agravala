@@ -30,7 +30,7 @@ const deploy = Array(2)
     ref: "origin/master",
     repo: "https://github.com/rrudol/ricart-agravala.git",
     path: "/tmp/www/ricart-agravala2",
-    "post-deploy": `npm install && pm2 startOrRestart ecosystem.json --env prod${i}`
+    "post-deploy": `npm install && pm2 startOrRestart ecosystem.config.js --env prod${i}`
   }))
   .reduce((a, c) => {
     a[c.key] = c;
