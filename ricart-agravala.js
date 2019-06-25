@@ -35,6 +35,12 @@ async function start() {
         exectuing = true;
 
         console.log("Entering Critical Section");
+        console.log("Starting...")
+        await delay(1000);
+        console.log("Working...")
+        await delay(2000);
+        console.log("Finishing...")
+        await delay(1000);
         console.log("Leaving Critical Section");
 
         exectuing = false;
@@ -50,7 +56,7 @@ async function start() {
   setInterval(() => {
     if (!app.state.requesting && !app.state.exectuing)
       app.emit("REQUEST", app.getId(), Date.now());
-  }, 500 + Math.random() * 1000);
+  }, 4000 + Math.random() * 4000);
 }
 
 start();
