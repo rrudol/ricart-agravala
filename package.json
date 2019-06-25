@@ -1,0 +1,16 @@
+{
+  "name": "ricart-agravala",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "start": "pm2 restart ecosystem-ricart-agravala.config.js --update-env --env development",
+    "stop": "pm2 stop ecosystem-ricart-agravala.config.js && pm2 delete ecosystem-ricart-agravala.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@rudol/distributed-event-emitter": "0.0.3",
+    "pm2": "^3.5.1"
+  }
+}
