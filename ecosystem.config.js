@@ -21,20 +21,25 @@ const nodes = Array(2)
     return node;
   });
 
-const production = Array(2)
+const deploy = Array(2)
   .fill(1)
   .map((_, i) => ({
+    key: `prod${i}`,
     user: "bitnami",
     host: hosts[i],
     ref: "origin/master",
     repo: "https://github.com/rrudol/ricart-agravala.git",
     path: "/tmp/www/ricart-agravala",
     "post-deploy": `npm install && pm2 startOrRestart ecosystem.json --env prod${i}`
-  }));
+  }))
+  .reduce((a, c) => {
+    a[c.key] = c;
+    return a;
+  }, {});
+
+console.log({ apps: nodes, deploy });
 
 module.exports = {
   apps: nodes,
-  deploy: {
-    production
-  }
+  deploy
 };
