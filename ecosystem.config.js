@@ -12,22 +12,30 @@ const nodes = Array(2)
       address: hosts[i]
     }
   }))
-  .map((node, i, nodes) => ({
-    ...node,
-    env: { ...node.env, nodes: JSON.stringify(nodes) },
-    env_production: { ...node.env, nodes: JSON.stringify(nodes) }
+  .map((node, i, nodes) =>
+    ({
+      ...node,
+      env: { ...node.env, nodes: JSON.stringify(nodes) }
+    }.map((node, i) => {
+      node[`env_prod` + i] = node.env;
+      return node;
+    }))
+  );
+
+const production = Array(2)
+  .fill(1)
+  .map((_, i) => ({
+    user: "bitnami",
+    host: hosts[i],
+    ref: "origin/master",
+    repo: "https://github.com/rrudol/ricart-agravala.git",
+    path: "/tmp/www/ricart-agravala",
+    "post-deploy": `npm install && pm2 startOrRestart ecosystem.json --env prod${i}`
   }));
 
 module.exports = {
   apps: nodes,
   deploy: {
-    production: {
-      user: "bitnami",
-      host: hosts,
-      ref: "origin/master",
-      repo: "https://github.com/rrudol/ricart-agravala.git",
-      path: "/tmp/www/ricart-agravala",
-      "post-deploy": "npm install"
-    }
+    production
   }
 };
