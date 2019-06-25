@@ -1,4 +1,5 @@
 const { DistributedEventEmmiter } = require("@rudol/distributed-event-emitter");
+const delay = require('delay');
 
 async function start() {
   const app = await DistributedEventEmmiter.create();
