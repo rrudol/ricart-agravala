@@ -3,7 +3,7 @@ const hosts = ["35.157.109.195", "18.184.146.196"];
 const nodes = Array(2)
   .fill(1)
   .map(({}, i) => ({
-    name: `Ricart-Agravala ${i}`,
+    name: `Ricart-Agravala-${i}`,
     script: "./ricart-agravala.js",
     env: {
       token: i === 0 ? "true" : "",
@@ -30,7 +30,7 @@ const deploy = Array(2)
     ref: "origin/master",
     repo: "https://github.com/rrudol/ricart-agravala.git",
     path: "/tmp/www/ricart-agravala2",
-    "post-deploy": `npm install && pm2 startOrRestart ecosystem.config.js --env prod${i}`
+    "post-deploy": `npm install && pm2 startOrRestart ecosystem.config.js --env prod${i} --only Ricart-Agravala-${i}`
   }))
   .reduce((a, c) => {
     a[c.key] = c;
