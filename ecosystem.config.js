@@ -12,15 +12,14 @@ const nodes = Array(2)
       address: hosts[i]
     }
   }))
-  .map((node, i, nodes) =>
-    ({
-      ...node,
-      env: { ...node.env, nodes: JSON.stringify(nodes) }
-    }.map((node, i) => {
-      node[`env_prod` + i] = node.env;
-      return node;
-    }))
-  );
+  .map((node, i, nodes) => ({
+    ...node,
+    env: { ...node.env, nodes: JSON.stringify(nodes) }
+  }))
+  .map((node, i) => {
+    node[`env_prod` + i] = node.env;
+    return node;
+  });
 
 const production = Array(2)
   .fill(1)
